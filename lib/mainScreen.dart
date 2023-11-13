@@ -10,13 +10,15 @@ class MainScreenPage extends StatefulWidget {
 }
 
 class _MainScreenPageState extends State<MainScreenPage> {
-  int Oscore = 0;
-  int Xscore = 0;
+  int oScore = 0;
+  int xScore = 0;
 
-  bool Oturn = true;
-  int filledScore = 0;
+  bool oTurn = true;
+  int filledBox = 0;
 
-  List<String> displayO = ['', '', '', '', '', '', '', '', '', '', ''];
+  bool gameWon = false;
+
+  List<String> displayO = List.filled(9, '');
   String resultDeclares = '';
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
                       ),
                       SizedBox(height: 15),
                       Text(
-                        Oscore.toString(),
+                        oScore.toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -58,6 +60,11 @@ class _MainScreenPageState extends State<MainScreenPage> {
                       ),
                     ],
                   ),
+                  GestureDetector(
+                      onTap: () {
+                        resetScore();
+                      },
+                      child: Icon(Icons.refresh)),
                   Column(
                     children: [
                       Text(
@@ -76,7 +83,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
                       ),
                       SizedBox(height: 15),
                       Text(
-                        Xscore.toString(),
+                        xScore.toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -97,7 +104,9 @@ class _MainScreenPageState extends State<MainScreenPage> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      _tapped(index);
+                      if (!gameWon) {
+                        _tapped(index);
+                      }
                     },
                     child: Container(
                       margin: EdgeInsets.all(3),
@@ -131,7 +140,9 @@ class _MainScreenPageState extends State<MainScreenPage> {
                       shape: BeveledRectangleBorder(
                           borderRadius: BorderRadius.circular(6)),
                       backgroundColor: Colors.purple.shade400),
-                  onPressed: () {},
+                  onPressed: () {
+                    resetGame();
+                  },
                   child: Text(
                     'Play',
                     style: TextStyle(
@@ -150,15 +161,15 @@ class _MainScreenPageState extends State<MainScreenPage> {
 
   void _tapped(int index) {
     setState(() {
-      if (Oturn && displayO[index] == '') {
+      if (oTurn && displayO[index] == '') {
         displayO[index] = 'O';
-         filledScore++;
-      } else if (!Oturn && displayO[index] == '') {
+        filledBox++;
+      } else if (!oTurn && displayO[index] == '') {
         displayO[index] = 'X';
-         filledScore++;
+        filledBox++;
       }
-     
-      Oturn = !Oturn;
+
+      oTurn = !oTurn;
       _checkWinner();
     });
   }
@@ -211,22 +222,36 @@ class _MainScreenPageState extends State<MainScreenPage> {
         displayO[2] != '') {
       resultDeclares = 'Player ${displayO[2]} is winner';
       updateScore(displayO[2]);
-    }else if(filledScore == 9)
-    {
+    } else if (filledBox == 9) {
       resultDeclares = 'Tie';
     }
   }
 
-  void updateScore(String winner)
-  {
+  void updateScore(String winner) {
     setState(() {
-      
+      if (winner == 'O') {
+        oScore++;
+        gameWon = true;
+      } else if (winner == 'X') {
+        xScore++;
+        gameWon = true;
+      }
     });
-    if (winner == 'O') {
-      Oscore++;
-    }else if(winner =='X')
-    {
-      Xscore++;
-    }
+  }
+
+  void resetGame() {
+    setState(() {
+      displayO = List.filled(9, '');
+      resultDeclares = '';
+      filledBox = 0;
+      gameWon = false;
+    });
+  }
+
+  void resetScore() {
+    setState(() {
+      oScore = 0;
+      xScore = 0;
+    });
   }
 }
