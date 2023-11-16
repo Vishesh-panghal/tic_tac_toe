@@ -10,6 +10,11 @@ class MainScreenPage extends StatefulWidget {
 }
 
 class _MainScreenPageState extends State<MainScreenPage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
   int oScore = 0;
   int xScore = 0;
 
@@ -20,6 +25,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
 
   List<String> displayO = List.filled(9, '');
   String resultDeclares = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +136,14 @@ class _MainScreenPageState extends State<MainScreenPage> {
                 },
               ),
             ),
-            Text(resultDeclares),
+            Text(
+              resultDeclares,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             SizedBox(height: 30),
             SizedBox(
               height: 50,
