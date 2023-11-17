@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/connectionScreen.dart';
 
 class MainScreenPage extends StatefulWidget {
   const MainScreenPage({super.key});
@@ -10,11 +11,11 @@ class MainScreenPage extends StatefulWidget {
 }
 
 class _MainScreenPageState extends State<MainScreenPage> {
-
   @override
   void initState() {
     super.initState();
   }
+
   int oScore = 0;
   int xScore = 0;
 
@@ -33,7 +34,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Expanded(
               flex: 1,
               child: Row(
@@ -41,24 +42,24 @@ class _MainScreenPageState extends State<MainScreenPage> {
                 children: [
                   Column(
                     children: [
-                      Text(
+                      const Text(
                         'Player O',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       ),
-                      Text(
+                      const Text(
                         'Score ',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Text(
                         oScore.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 22,
@@ -70,27 +71,27 @@ class _MainScreenPageState extends State<MainScreenPage> {
                       onTap: () {
                         resetScore();
                       },
-                      child: Icon(Icons.refresh)),
+                      child: const Icon(Icons.refresh)),
                   Column(
                     children: [
-                      Text(
+                      const Text(
                         'Player X',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       ),
-                      Text(
+                      const Text(
                         'Score ',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Text(
                         xScore.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 22,
@@ -105,7 +106,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
               flex: 3,
               child: GridView.builder(
                 itemCount: 9,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3),
                 itemBuilder: (context, index) {
                   return GestureDetector(
@@ -115,8 +116,8 @@ class _MainScreenPageState extends State<MainScreenPage> {
                       }
                     },
                     child: Container(
-                      margin: EdgeInsets.all(3),
-                      padding: EdgeInsets.all(2),
+                      margin: const EdgeInsets.all(3),
+                      padding: const EdgeInsets.all(2),
                       height: 70,
                       width: 70,
                       decoration: BoxDecoration(
@@ -125,7 +126,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
                       child: Center(
                         child: Text(
                           displayO[index],
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 52,
                           ),
@@ -138,13 +139,13 @@ class _MainScreenPageState extends State<MainScreenPage> {
             ),
             Text(
               resultDeclares,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             SizedBox(
               height: 50,
               width: 85,
@@ -156,7 +157,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
                   onPressed: () {
                     resetGame();
                   },
-                  child: Text(
+                  child: const Text(
                     'Play',
                     style: TextStyle(
                       color: Colors.white,
@@ -165,7 +166,27 @@ class _MainScreenPageState extends State<MainScreenPage> {
                     ),
                   )),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ConnectionScreen(),
+                    ));
+              },
+              child: const Text(
+                'Connect',
+                style: TextStyle(color: Colors.white, fontSize: 22, shadows: [
+                  BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 12,
+                    blurStyle: BlurStyle.inner,
+                    offset: Offset(1, 1),
+                  )
+                ]),
+              ),
+            )
           ],
         ),
       ),

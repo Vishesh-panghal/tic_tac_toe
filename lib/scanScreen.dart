@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -28,7 +28,7 @@ class _ScanScreenState extends State<ScanScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
@@ -48,7 +48,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             SizedBox(
               height: 350,
               width: 350,
@@ -57,22 +57,22 @@ class _ScanScreenState extends State<ScanScreen> {
                 onQRViewCreated: _QRViewCreated,
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Text(
-                  scannedCode,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 32,
-                      shadows: [
-                        BoxShadow(
-                          color: Colors.black,
-                          blurRadius: 20,
-                          blurStyle: BlurStyle.outer,
-                          offset: Offset(-1, 1),
-                        ),
-                      ]),
-                ),
+              scannedCode,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32,
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 20,
+                      blurStyle: BlurStyle.outer,
+                      offset: Offset(-1, 1),
+                    ),
+                  ]),
+            ),
           ],
         ),
       ),
@@ -83,7 +83,7 @@ class _ScanScreenState extends State<ScanScreen> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-      scannedCode = scanData.code!;
+        scannedCode = scanData.code!;
       });
     });
   }
