@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:motion/motion.dart';
 import 'package:tic_tac_toe/connectionScreen.dart';
 
 class MainScreenPage extends StatefulWidget {
@@ -104,37 +105,42 @@ class _MainScreenPageState extends State<MainScreenPage> {
             ),
             Expanded(
               flex: 3,
-              child: GridView.builder(
-                itemCount: 9,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      if (!gameWon) {
-                        _tapped(index);
-                      }
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(3),
-                      padding: const EdgeInsets.all(2),
-                      height: 70,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          color: Colors.yellow.shade200,
-                          borderRadius: BorderRadius.circular(6)),
-                      child: Center(
-                        child: Text(
-                          displayO[index],
-                          style: const TextStyle(
-                            color: Colors.black54,
-                            fontSize: 52,
+              child: Motion.elevated(
+                elevation: 70,
+                glare: false,
+                shadow: true,
+                child: GridView.builder(
+                  itemCount: 9,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        if (!gameWon) {
+                          _tapped(index);
+                        }
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(2),
+                        height: 70,
+                        width: 70,
+                        decoration: BoxDecoration(
+                            color: Colors.yellow.shade200,
+                            borderRadius: BorderRadius.circular(6)),
+                        child: Center(
+                          child: Text(
+                            displayO[index],
+                            style: const TextStyle(
+                              color: Colors.black54,
+                              fontSize: 52,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
             Text(
